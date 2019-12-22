@@ -24,14 +24,14 @@ public class Client1Server {
         } catch (IOException e) {
             throw new IllegalStateException(e);
         }
-
-        DragAndMove dragAndMove = new DragAndMove();
+        System.out.println("Open to connect");
 //        while (true) {
             try {
 //                new ClientHandler(serverSocket.accept(), this).start();
-                DragAndMove.enemy = serverSocket.accept();
-                dragAndMove.startGame();
-
+//                DragAndMove.enemy = serverSocket.accept();
+//                dragAndMove.startGame();
+                this.enemy = serverSocket.accept();
+                System.out.println("Enemy connected");
 
             } catch (IOException e) {
                 throw new IllegalStateException(e);
@@ -48,5 +48,13 @@ public class Client1Server {
 
     public void setClients(List<ClientHandler> clients) {
         this.clients = clients;
+    }
+
+    public Socket getEnemy() {
+        return enemy;
+    }
+
+    public void setEnemy(Socket enemy) {
+        this.enemy = enemy;
     }
 }

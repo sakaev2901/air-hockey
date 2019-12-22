@@ -41,6 +41,7 @@ public class ClientHandler extends Thread {
 //                ApplicationContext applicationContext = new ApplicationContextReflectionBased();
 //                applicationContext.scan(messageResolver);
 //                messageResolver.handleRequest(inputLine);
+                System.out.println(inputLine);
                 for (ClientHandler client:
                      clients) {
                     client.out.println(inputLine);

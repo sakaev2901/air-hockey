@@ -36,15 +36,13 @@ public class DragAndMove2 extends Application {
         circle_Green.setCenterY(150);
         circle_Green.setOnMousePressed(circleOnMousePressedEventHandler);
         circle_Green.setOnMouseDragged(circleOnMouseDraggedEventHandler);
-
-
         Group root = new Group();
         root.getChildren().addAll(circle_Red, circle_Green);
         primaryStage.setResizable(true);
         primaryStage.setScene(new Scene(root, 400, 350));
         primaryStage.setTitle("2");
         client = new SocketClient();
-        client.startConnection("localhost", 5555);
+        client.startConnection("localhost", 6666);
         System.out.println(client);
         primaryStage.show();
     }

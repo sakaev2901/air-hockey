@@ -14,6 +14,7 @@ public class SocketClient {
     private Socket clientSocket;
     private PrintWriter out;
     private BufferedReader in;
+    public static String responce;
 //    MessageResolver resolver;
 
     public void startConnection(String ip, int port) {
@@ -35,7 +36,8 @@ public class SocketClient {
                 try {
                     String response = in.readLine();
                     if (response != null) {
-//                        System.out.println(response);
+                        System.out.println(response);
+                        SocketClient.responce = response;
 //                        System.out.println(response);
 //                        resolver.resolve(response);
 //                        menuController.handleResponse(response);

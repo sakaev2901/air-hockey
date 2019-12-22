@@ -50,8 +50,10 @@ public class DragAndMove extends Application {
         primaryStage.setResizable(true);
         primaryStage.setScene(new Scene(root, 400, 350));
         primaryStage.setTitle("1");
+        this.client = new SocketClient();
+        client.startConnection("localhost", 6666);
         EnemyTracker enemyTracker = new EnemyTracker();
-        enemyTracker.setEnemy(enemy);
+//        enemyTracker.setEnemy(client1Server.getEnemy());
         enemyTracker.setEnemyCircle(circle_Green);
         enemyTracker.start();
         primaryStage.show();
