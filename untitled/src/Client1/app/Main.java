@@ -22,7 +22,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        MainBall mainBall = new MainBall(25d);
+        MainBall mainBall = new MainBall(70d);
         Puck puck = new Puck(20d);
         mainBall.setPuck(puck);
         Group root = new Group();

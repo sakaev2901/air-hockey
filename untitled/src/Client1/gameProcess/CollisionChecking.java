@@ -71,20 +71,20 @@ public class CollisionChecking extends AnimationTimer {
 
             // walls
             if (puck.getCircle().getCenterX() <= puck.getRadius()) {
-                puck.getVelocity().setX(puck.getVelocity().getX() * -1 * Main.speedLoss);
-                puck.getVelocity().setY(puck.getVelocity().getY() * Main.speedLoss);
+                puck.getVelocity().setX(puck.getVelocity().getX() * -1);
+                puck.getVelocity().setY(puck.getVelocity().getY());
             }
             if (puck.getCircle().getCenterX() >= (Main.frameWidth -  puck.getRadius())) {
-                puck.getVelocity().setX(puck.getVelocity().getX() * -1 * Main.speedLoss);
-                puck.getVelocity().setY(puck.getVelocity().getY() * Main.speedLoss);
+                puck.getVelocity().setX(puck.getVelocity().getX() * -1);
+                puck.getVelocity().setY(puck.getVelocity().getY());
             }
             if (puck.getCircle().getCenterY() <= puck.getRadius()) {
-                puck.getVelocity().setY(puck.getVelocity().getY() * -1 * Main.speedLoss);
-                puck.getVelocity().setX(puck.getVelocity().getX() * Main.speedLoss);
+                puck.getVelocity().setY(puck.getVelocity().getY() * -1);
+                puck.getVelocity().setX(puck.getVelocity().getX());
             }
             if (puck.getCircle().getCenterY() >= (Main.frameHeight - puck.getRadius())) {
-                puck.getVelocity().setY(puck.getVelocity().getY() * -1 * Main.speedLoss);
-                puck.getVelocity().setX(puck.getVelocity().getX() * Main.speedLoss);
+                puck.getVelocity().setY(puck.getVelocity().getY() * -1);
+                puck.getVelocity().setX(puck.getVelocity().getX());
             }
 
     }

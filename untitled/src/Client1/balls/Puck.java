@@ -24,8 +24,8 @@ public class Puck {
     }
 
     public void move() {
-        this.circle.setCenterY(this.circle.getCenterY() + this.velocity.getY() * 10);
-        this.circle.setCenterX(this.circle.getCenterX() + this.velocity.getX() * 10);
+        this.circle.setCenterY(this.circle.getCenterY() + (this.velocity.getY() * 10) * Main.speedLoss);
+        this.circle.setCenterX(this.circle.getCenterX() + (this.velocity.getX() * 10)* Main.speedLoss);
     }
 
     public void setVelocity(Vector2d velocity) {
