@@ -1,10 +1,11 @@
-package Client1.gameProcess;
+package Client3.gameProcess;
 
 import Client1.app.Main;
 import Client1.balls.Ball;
 import Client1.balls.EnemyBall;
 import Client1.balls.MainBall;
 import Client1.balls.Puck;
+import Client1.gameProcess.CollisionsHandling;
 import Client1.physics.Vector2d;
 import javafx.animation.AnimationTimer;
 
@@ -84,7 +85,6 @@ public class CollisionChecking extends AnimationTimer {
             velocity.normalize();
             puck.setVelocity(velocity);
 //            puck.setVelocity(new Vector2d(0d - puck.getCircle().getCenterX(), 0d - puck.getCircle().getCenterY()));
-            collisionsHandling.speed = 6d;
             System.out.println(mainBallX + " " + mainBallY);
         }
 

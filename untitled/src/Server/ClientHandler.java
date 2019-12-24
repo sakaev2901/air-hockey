@@ -35,7 +35,9 @@ public class ClientHandler extends Thread {
                 System.out.println(inputLine);
                 for (ClientHandler client:
                      clients) {
-                    client.out.println(inputLine);
+                    if (this.clientSocket != client.clientSocket) {
+                        client.out.println(inputLine);
+                    }
                 }
                 System.out.println(inputLine);
             }

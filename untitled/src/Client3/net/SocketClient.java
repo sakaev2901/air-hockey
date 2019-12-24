@@ -1,24 +1,25 @@
-package Client2;
+package Client3.net;
 
 //import controllers.MessageResolver;
 
 
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.Socket;
 
 public class SocketClient {
     private Socket clientSocket;
-    private BufferedWriter out;
-    private PrintWriter out2;
+    private PrintWriter out;
     private BufferedReader in;
-//    MessageResolver resolver;
+    public static String responce;
 
     public void startConnection(String ip, int port) {
         try {
             clientSocket = new Socket(ip, port);
-            out = new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream()));
-            this.out2 = new PrintWriter(clientSocket.getOutputStream(), true);
+            out = new PrintWriter(clientSocket.getOutputStream(), true);
             in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             new Thread(receiverMessageTask).start();
         } catch (Exception e) {
@@ -33,6 +34,7 @@ public class SocketClient {
                 try {
                     String response = in.readLine();
                     if (response != null) {
+                        SocketClient.responce = response;
                     }
                 } catch (IOException e) {
                     throw new IllegalStateException(e);
@@ -43,9 +45,8 @@ public class SocketClient {
     };
 
     public void sendMessage(String message) {
-            System.out.println(message);
-            out2.println(message);
-    }
+        out.println(message);
+        }
 
     public Socket getClientSocket() {
         return clientSocket;
@@ -55,6 +56,13 @@ public class SocketClient {
         this.clientSocket = clientSocket;
     }
 
+    public PrintWriter getOut() {
+        return out;
+    }
+
+    public void setOut(PrintWriter out) {
+        this.out = out;
+    }
 
     public BufferedReader getIn() {
         return in;

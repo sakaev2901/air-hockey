@@ -1,6 +1,8 @@
-package Client1.balls;
+package Client3.balls;
 
 import Client1.app.Main;
+import Client1.balls.Ball;
+import Client1.balls.Puck;
 import Client1.net.SocketClient;
 import javafx.event.EventHandler;
 import javafx.scene.Cursor;
@@ -8,9 +10,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
-public class MainBall  extends Ball{
+public class MainBall  extends Ball {
     private Circle circle;
-    private Puck puck;
+    private Client1.balls.Puck puck;
     private Double radius;
     double oldX, oldY;
     private SocketClient client;
@@ -83,7 +85,7 @@ public class MainBall  extends Ball{
         this.radius = radius;
     }
 
-    public Puck getPuck() {
+    public Client1.balls.Puck getPuck() {
         return puck;
     }
 

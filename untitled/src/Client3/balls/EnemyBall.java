@@ -1,14 +1,16 @@
-package Client1.balls;
+package Client3.balls;
 
 import Client1.app.Main;
+import Client1.balls.Ball;
+import Client1.balls.Puck;
 import Client1.handling.EnemyTracker;
 import javafx.scene.Cursor;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
-public class EnemyBall extends Ball{
+public class EnemyBall extends Ball {
     private Circle circle;
-    private Puck puck;
+    private Client1.balls.Puck puck;
     private Double radius;
     private double oldX, oldY;
     private EnemyTracker enemyTracker;
@@ -30,7 +32,7 @@ public class EnemyBall extends Ball{
         this.circle = circle;
     }
 
-    public Puck getPuck() {
+    public Client1.balls.Puck getPuck() {
         return puck;
     }
 
