@@ -1,36 +1,12 @@
 package Client1;
 
+import Client1.net.SocketClient;
 import javafx.animation.AnimationTimer;
 import javafx.scene.shape.Circle;
-import lombok.SneakyThrows;
-
-import java.io.BufferedReader;
-import java.io.DataInputStream;
-import java.io.IOException;
-//imp     try {
-//            in = new DataInputStream(enemy.getInputStream());
-//        } catch (IOException e) {
-//            throw new IllegalStateException(e);
-//        }ort java.io.InputStreamReader;
-import java.net.Socket;
 
 public class EnemyTracker extends AnimationTimer {
-    private Socket enemy;
+
     private Circle enemyCircle;
-    private DataInputStream in = null;
-
-    public Socket getEnemy() {
-        return enemy;
-    }
-
-    public void setEnemy(Socket enemy) {
-        this.enemy = enemy;
-        try {
-            in = new DataInputStream(enemy.getInputStream());
-        } catch (IOException e) {
-            throw new IllegalStateException(e);
-        }
-    }
 
     public Circle getEnemyCircle() {
         return enemyCircle;
@@ -44,12 +20,21 @@ public class EnemyTracker extends AnimationTimer {
     public void handle(long now) {
         if (SocketClient.responce != null){
             String[] location = SocketClient.responce.split(" ");
-            double x = Double.valueOf(location[0]);
-            double y = Double.valueOf(location[1]);
-            System.out.println(x + " " + y);
 
-            enemyCircle.setTranslateX(x);
-            enemyCircle.setTranslateY(y);
+            double x =  400 - Double.valueOf(location[0]);
+            double y =  450 - Double.valueOf(location[1]);
+            if (x > 400 - 25) {
+                x = 375;
+            }
+            if (x < 25) {
+                x = 25;
+            }
+            System.out.println("not reverse location: " + location[0] + " " + location[1]);
+            System.out.println("current location:" +  x + " " + y);
+            enemyCircle.setCenterX(x);
+            enemyCircle.setCenterY(y);
+//            enemyCircle.setTranslateX(x);
+//            enemyCircle.setTranslateY(y);
         }
 
     }

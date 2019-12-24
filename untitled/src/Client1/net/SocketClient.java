@@ -1,4 +1,4 @@
-package Client1;
+package Client1.net;
 
 //import controllers.MessageResolver;
 
@@ -15,7 +15,6 @@ public class SocketClient {
     private PrintWriter out;
     private BufferedReader in;
     public static String responce;
-//    MessageResolver resolver;
 
     public void startConnection(String ip, int port) {
         try {
@@ -23,7 +22,6 @@ public class SocketClient {
             out = new PrintWriter(clientSocket.getOutputStream(), true);
             in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             new Thread(receiverMessageTask).start();
-//            resolver = new MessageResolver(this);
         } catch (Exception e) {
             throw new IllegalStateException(e);
         }
@@ -36,11 +34,7 @@ public class SocketClient {
                 try {
                     String response = in.readLine();
                     if (response != null) {
-                        System.out.println(response);
                         SocketClient.responce = response;
-//                        System.out.println(response);
-//                        resolver.resolve(response);
-//                        menuController.handleResponse(response);
                     }
                 } catch (IOException e) {
                     throw new IllegalStateException(e);

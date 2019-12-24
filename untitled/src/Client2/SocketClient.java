@@ -21,7 +21,6 @@ public class SocketClient {
             this.out2 = new PrintWriter(clientSocket.getOutputStream(), true);
             in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             new Thread(receiverMessageTask).start();
-//            resolver = new MessageResolver(this);
         } catch (Exception e) {
             throw new IllegalStateException(e);
         }
@@ -34,9 +33,6 @@ public class SocketClient {
                 try {
                     String response = in.readLine();
                     if (response != null) {
-//                        System.out.println(response);
-//                        resolver.resolve(response);
-//                        menuController.handleResponse(response);
                     }
                 } catch (IOException e) {
                     throw new IllegalStateException(e);
@@ -47,14 +43,8 @@ public class SocketClient {
     };
 
     public void sendMessage(String message) {
-//        try {
             System.out.println(message);
-//            out.write(message);
             out2.println(message);
-//            out.flush();
-//        } catch (IOException e) {
-//            throw new IllegalStateException(e);
-//        }
     }
 
     public Socket getClientSocket() {
