@@ -1,11 +1,10 @@
-package Client1.app;
+package Client3.app;
 
+import Client3.app.Main;
+import Client3.app.Rooms;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.event.EventType;
 import javafx.geometry.Pos;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -22,7 +21,7 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class Menu extends Application {
+public class Menu2 extends Application {
 //    private Parent createContent() {
 //
 //
@@ -53,23 +52,24 @@ public class Menu extends Application {
                 new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent t) {
-                        try {
-                            main.start(primaryStage);
-                        } catch (Exception e) {
-                            throw new IllegalStateException(e);
-                        }
+//                        try {
+//                            main.start(primaryStage);
+//                        } catch (Exception e) {
+//                            throw new IllegalStateException(e);
+//                        }
+                        new Rooms().start(primaryStage);
                     }
                 };
         EventHandler<MouseEvent> connect =
                 new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent t) {
-                        new Rooms().start();
+                        new Rooms().start(primaryStage);
                     }
                 };
         menuItem1.setOnMouseClicked(circleOnMousePressedEventHandler);
         MenuItem menuItem2 = new MenuItem("Создать игру");
-        menuItem2.setOnMouseClicked(connect);
+
         MenuItem menuItem3 = new MenuItem("Настройки");
         MenuItem menuItem4 = new MenuItem("Выход");
         MenuBox vbox = new MenuBox(menuItem1, menuItem2, menuItem3, menuItem4
@@ -119,7 +119,7 @@ public class Menu extends Application {
     }
 
 
-    private static class MenuItem extends StackPane{
+    public static class MenuItem extends StackPane{
         public MenuItem(String name) {
             LinearGradient gradient = new LinearGradient(0, 0, 1, 0, true, CycleMethod.NO_CYCLE, new Stop[] {
                     new Stop(0, Color.DARKBLUE),

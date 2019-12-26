@@ -50,7 +50,6 @@ public class CollisionChecking extends AnimationTimer {
 
     @Override
     public void handle(long now) {
-        System.out.println("handle ");
         if (puck.getCircle().getCenterY() < 0) {
             Main.enemyText.setText(String.valueOf(Main.enemyScore++));
 

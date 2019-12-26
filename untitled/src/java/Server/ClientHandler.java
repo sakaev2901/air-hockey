@@ -11,14 +11,16 @@ public class ClientHandler extends Thread {
     private BufferedReader in;
 //    private MessageResolver messageResolver;
     private List<ClientHandler> clients;
+    private List<Room> rooms;
     private ChatMultiServer server;
     private PrintWriter out;
 
     ClientHandler(Socket socket, ChatMultiServer chatMultiServer) {
         this.server = chatMultiServer;
         this.clientSocket = socket;
+        this.rooms = chatMultiServer.getRooms();
         clients = chatMultiServer.getClients();
-        clients.add(this);
+//        clients.add(this);
         System.out.println("New Client");
         try {
             this.out = new PrintWriter(clientSocket.getOutputStream(), true);
@@ -32,10 +34,23 @@ public class ClientHandler extends Thread {
             in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             String inputLine;
             while (!clientSocket.isClosed() &&(inputLine = in.readLine()) != null) {
-                for (ClientHandler client:
-                     clients) {
-                    if (this.clientSocket != client.clientSocket) {
-                        client.out.println(inputLine);
+                String[] parts = inputLine.split(" ");
+                if (parts[0].equals("new-room")) {
+                    Room room = new Room(clientSocket);
+                    rooms.add(room);
+                } else if(parts[0].equals("get-rooms")) {
+                    //TODO
+                    String roomList ="";
+                    for (Room room:rooms) {
+                        roomList += room.getId() + " ";
+                    }
+                    out.println(roomList);
+                } else if(parts[0].equals("enter-room")) {
+                    for (Room room :rooms) {
+                        if(room.getId() == Integer.parseInt(parts[1])) {
+                            room.setClientUnRoot(clientSocket);
+                            System.out.println("success");
+                        }
                     }
                 }
             }

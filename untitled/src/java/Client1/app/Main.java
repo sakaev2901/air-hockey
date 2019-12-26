@@ -168,6 +168,7 @@ public class Main extends Application {
 
         SocketClient client = new SocketClient();
         client.startConnection("localhost", 6666);
+        client.sendMessage("new-room");
         puck.setClient(client);
         mainBall.setClient(client);
 

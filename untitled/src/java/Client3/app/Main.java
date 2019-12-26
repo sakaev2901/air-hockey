@@ -28,6 +28,7 @@ public class Main extends Application {
     public static Double strokeWidth = 10d;
     public static Text mainText;
     public static Text enemyText;
+    public Integer roomId;
 
 
 
@@ -52,6 +53,7 @@ public class Main extends Application {
 
         SocketClient client = new SocketClient();
         client.startConnection("localhost", 6666);
+        client.sendMessage("enter-room " + roomId);
         mainBall.setClient(client);
 
         //arena
@@ -176,5 +178,14 @@ public class Main extends Application {
         primaryStage.setScene(new Scene(root, frameWidth, frameHeight, Color.BLACK));
         primaryStage.setTitle("CLIENT 2");
         primaryStage.show();
+    }
+
+    public void connect(int parseInt, Stage primaryStage) {
+        roomId  = parseInt;
+        try {
+            start(primaryStage);
+        } catch (Exception e) {
+            throw new IllegalStateException(e);
+        }
     }
 }

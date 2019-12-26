@@ -36,7 +36,8 @@ public class EnemyTracker extends AnimationTimer {
                 enemyCircle.setCenterY(y);
                 puckCircle.setCenterX(puckX);
                 puckCircle.setCenterY(puckY);
-            } else {
+            } else if(location[0].equals("score")){
+
                 Main.mainText.setText(location[2]);
                 Main.enemyText.setText(location[1]);
             }

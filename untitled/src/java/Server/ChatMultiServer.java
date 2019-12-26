@@ -8,9 +8,11 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 public class ChatMultiServer  {
     private List<ClientHandler> clients;
+    private List<Room> rooms;
 
     public ChatMultiServer() {
         clients = new CopyOnWriteArrayList<>();
+        rooms = new CopyOnWriteArrayList<>();
     }
 
     public void start(int port) {
@@ -35,7 +37,13 @@ public class ChatMultiServer  {
     }
 
 
+    public List<Room> getRooms() {
+        return rooms;
+    }
 
+    public void setRooms(List<Room> rooms) {
+        this.rooms = rooms;
+    }
 
     public void setClients(List<ClientHandler> clients) {
         this.clients = clients;
