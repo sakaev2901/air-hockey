@@ -8,7 +8,11 @@ import Client1.balls.Puck;
 import Client1.net.SocketClient;
 import Client1.physics.Vector2d;
 import javafx.animation.AnimationTimer;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
+
+import java.io.File;
 
 
 public class CollisionChecking extends AnimationTimer {
@@ -113,6 +117,18 @@ public class CollisionChecking extends AnimationTimer {
             puck.setVelocity(velocity);
 //            puck.setVelocity(new Vector2d(0d - puck.getCircle().getCenterX(), 0d - puck.getCircle().getCenterY()));
             collisionsHandling.speed = 6d;
+            String musicFile1 = "src/assets/sound/ta.mp3";     // For example
+            String musicFile2 = "src/assets/sound/sha.mp3";     // For example
+
+            Media sound1 = new Media(new File(musicFile1).toURI().toString());
+            MediaPlayer mediaPlayer1 = new MediaPlayer(sound1);
+            Media sound2 = new Media(new File(musicFile2).toURI().toString());
+            MediaPlayer mediaPlayer2 = new MediaPlayer(sound2);
+            if (ball instanceof MainBall) {
+                mediaPlayer1.play();
+            } else {
+                mediaPlayer2.play();
+            }
         }
 
 
