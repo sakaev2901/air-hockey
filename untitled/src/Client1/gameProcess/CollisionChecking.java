@@ -5,8 +5,11 @@ import Client1.balls.Ball;
 import Client1.balls.EnemyBall;
 import Client1.balls.MainBall;
 import Client1.balls.Puck;
+import Client1.net.SocketClient;
 import Client1.physics.Vector2d;
 import javafx.animation.AnimationTimer;
+import javafx.stage.Stage;
+
 
 public class CollisionChecking extends AnimationTimer {
 
@@ -14,6 +17,10 @@ public class CollisionChecking extends AnimationTimer {
     private MainBall mainBall;
     private EnemyBall enemyBall;
     private CollisionsHandling collisionsHandling;
+    private Stage primaryStage;
+    private Main main = new Main();
+    private SocketClient client;
+
 
     public CollisionChecking(Puck puck) {
         this.puck = puck;
@@ -51,21 +58,42 @@ public class CollisionChecking extends AnimationTimer {
        checkCollisions(mainBall);
        checkCollisions(enemyBall);
         if (puck.getCircle().getCenterX() <= puck.getRadius()) {
-            puck.getVelocity().setX(puck.getVelocity().getX() * -1);
-            puck.getVelocity().setY(puck.getVelocity().getY());
+            Vector2d newVelocity = new Vector2d(puck.getVelocity().getX() * -1, puck.getVelocity().getY());
+            puck.setVelocity(newVelocity);
         }
         if (puck.getCircle().getCenterX() >= (Main.frameWidth -  puck.getRadius())) {
-            puck.getVelocity().setX(puck.getVelocity().getX() * -1);
-            puck.getVelocity().setY(puck.getVelocity().getY());
+            Vector2d newVelocity = new Vector2d(puck.getVelocity().getX() * -1, puck.getVelocity().getY());
+            puck.setVelocity(newVelocity);
         }
-        if (puck.getCircle().getCenterY() <= puck.getRadius()) {
-            puck.getVelocity().setY(puck.getVelocity().getY() * -1);
-            puck.getVelocity().setX(puck.getVelocity().getX());
+        if (puck.getCircle().getCenterY() <= puck.getRadius() && puck.getCircle().getCenterX()<=(Main.frameWidth/4)
+            || puck.getCircle().getCenterY() <= puck.getRadius() && puck.getCircle().getCenterX()>=(Main.frameWidth* 3/4)) {
+            Vector2d newVelocity = new Vector2d(puck.getVelocity().getX(), puck.getVelocity().getY() * -1);
+            puck.setVelocity(newVelocity);
         }
-        if (puck.getCircle().getCenterY() >= (Main.frameHeight - puck.getRadius())) {
-            puck.getVelocity().setY(puck.getVelocity().getY() * -1);
-            puck.getVelocity().setX(puck.getVelocity().getX());
+        if (puck.getCircle().getCenterY() >= (Main.frameHeight - puck.getRadius()) && puck.getCircle().getCenterX()<=(Main.frameWidth/4)
+                || puck.getCircle().getCenterY() >= (Main.frameHeight - puck.getRadius())&& puck.getCircle().getCenterX()>=(Main.frameWidth* 3/4)) {
+            Vector2d newVelocity = new Vector2d(puck.getVelocity().getX(), puck.getVelocity().getY() * -1);
+            puck.setVelocity(newVelocity);
         }
+        if (puck.getCircle().getCenterY() < 0) {
+            Main.mainText.setText(String.valueOf(++Main.mainScore));
+            resetAll();
+        }
+        if (puck.getCircle().getCenterY() > Main.frameHeight) {
+            Main.enemyText.setText(String.valueOf(++Main.enemyScore));
+            resetAll();
+        }
+    }
+
+    public void resetAll() {
+        client.sendMessage("score " + Main.mainText.getText() + " " + Main.enemyText.getText());
+        puck.getCircle().setCenterX(Main.frameWidth/2);
+        puck.getCircle().setCenterY(Main.frameHeight/2);
+        puck.setVelocity(new Vector2d(0d, 0d));
+        enemyBall.getCircle().setCenterY(0d + enemyBall.getRadius());
+        enemyBall.getCircle().setCenterX(Main.frameWidth/2);
+        mainBall.getCircle().setCenterY(Main.frameHeight - enemyBall.getRadius());
+        mainBall.getCircle().setCenterX(Main.frameWidth/2);
     }
 
     public void checkCollisions(Ball ball) {
@@ -85,12 +113,27 @@ public class CollisionChecking extends AnimationTimer {
             puck.setVelocity(velocity);
 //            puck.setVelocity(new Vector2d(0d - puck.getCircle().getCenterX(), 0d - puck.getCircle().getCenterY()));
             collisionsHandling.speed = 6d;
-            System.out.println(mainBallX + " " + mainBallY);
         }
 
 
         // walls
 
 
+    }
+
+    public Stage getPrimaryStage() {
+        return primaryStage;
+    }
+
+    public void setPrimaryStage(Stage primaryStage) {
+        this.primaryStage = primaryStage;
+    }
+
+    public SocketClient getClient() {
+        return client;
+    }
+
+    public void setClient(SocketClient client) {
+        this.client = client;
     }
 }

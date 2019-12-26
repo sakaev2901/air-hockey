@@ -63,8 +63,7 @@ public class MainBall  extends Ball{
 //                    System.out.println("X: " + x + " Y: " + y);
                     ((Circle) (t.getSource())).setCenterY(y);
                     ((Circle) (t.getSource())).setCenterX(x);
-                    String location = String.valueOf(x + " " + y);
-                    client.sendMessage(location);
+
                 }
             };
     public Circle getCircle() {

@@ -32,14 +32,12 @@ public class ClientHandler extends Thread {
             in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             String inputLine;
             while (!clientSocket.isClosed() &&(inputLine = in.readLine()) != null) {
-                System.out.println(inputLine);
                 for (ClientHandler client:
                      clients) {
                     if (this.clientSocket != client.clientSocket) {
                         client.out.println(inputLine);
                     }
                 }
-                System.out.println(inputLine);
             }
             in.close();
             clientSocket.close();

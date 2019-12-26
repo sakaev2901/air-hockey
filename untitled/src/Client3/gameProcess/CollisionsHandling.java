@@ -1,8 +1,9 @@
 package Client3.gameProcess;
 
-import Client1.balls.EnemyBall;
-import Client1.balls.MainBall;
-import Client1.balls.Puck;
+import Client3.balls.EnemyBall;
+import Client3.balls.MainBall;
+import Client3.balls.Puck;
+import Client3.net.SocketClient;
 import javafx.animation.AnimationTimer;
 
 public class CollisionsHandling extends AnimationTimer {
@@ -16,8 +17,9 @@ public class CollisionsHandling extends AnimationTimer {
     }
 
     @Override
-    public void handle(long now) {
-        puck.move();
+    public void handle(long now)
+    {
+            puck.move();
     }
 
     public Puck getPuck() {

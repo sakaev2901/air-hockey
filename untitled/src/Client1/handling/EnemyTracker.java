@@ -26,19 +26,19 @@ public class EnemyTracker extends AnimationTimer {
     public void handle(long now) {
         if (SocketClient.responce != null){
             String[] location = SocketClient.responce.split(" ");
-
-            double x =  Main.frameWidth - Double.valueOf(location[0]);
-            double y =  Main.frameHeight - Double.valueOf(location[1]);
+            if (location[0].equals("ball")) {
+                double x =  Main.frameWidth - Double.valueOf(location[1]);
+                double y =  Main.frameHeight - Double.valueOf(location[2]);
+                enemyCircle.setCenterX(x);
+                enemyCircle.setCenterY(y);
+            }
 //            if (x > 400 - 25) {
 //                x = 375;
 //            }
 //            if (x < 25) {
 //                x = 25;
 //            }
-            System.out.println("not reverse location: " + location[0] + " " + location[1]);
-            System.out.println("current location:" +  x + " " + y);
-            enemyCircle.setCenterX(x);
-            enemyCircle.setCenterY(y);
+
 //            enemyCircle.setTranslateX(x);
 //            enemyCircle.setTranslateY(y);
         }
